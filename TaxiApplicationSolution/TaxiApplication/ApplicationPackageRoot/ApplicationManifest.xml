@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ApplicationManifest xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" ApplicationTypeName="TaxiApplicationType" ApplicationTypeVersion="1.0.0" xmlns="http://schemas.microsoft.com/2011/01/fabric">
+  <Parameters>
+    <Parameter Name="WebAPIStateless_ASPNETCORE_ENVIRONMENT" DefaultValue="Development" />
+  </Parameters>
+  <ServiceManifestImport>
+    <ServiceManifestRef ServiceManifestName="RideManagementStatefulPkg" ServiceManifestVersion="1.0.0" />
+    <ConfigOverrides />
+  </ServiceManifestImport>
+  <ServiceManifestImport>
+    <ServiceManifestRef ServiceManifestName="UserManagementStatefulPkg" ServiceManifestVersion="1.0.0" />
+    <ConfigOverrides />
+  </ServiceManifestImport>
+  <ServiceManifestImport>
+    <ServiceManifestRef ServiceManifestName="WebAPIStatelessPkg" ServiceManifestVersion="1.0.0" />
+    <ConfigOverrides />
+    <EnvironmentOverrides CodePackageRef="Code">
+      <EnvironmentVariable Name="ASPNETCORE_ENVIRONMENT" Value="[WebAPIStateless_ASPNETCORE_ENVIRONMENT]" />
+    </EnvironmentOverrides>
+  </ServiceManifestImport>
+</ApplicationManifest>
